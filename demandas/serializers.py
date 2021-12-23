@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from demandas.models import Endereco, Contato, Demanda
+from accounts.serializers import UsuarioListSerializer
 
 class EnderecoSerializer(serializers.ModelSerializer):
     class Meta:
@@ -14,6 +15,11 @@ class ContatoSerializer(serializers.ModelSerializer):
         # fields = ('email', 'telefone',)
 
 class DemandaSerializer(serializers.ModelSerializer):
+
+    endereco  =  EnderecoSerializer()
+    contato  =  ContatoSerializer()
+    anunciante  =  UsuarioListSerializer()
+
     class Meta:
         model = Demanda
         fields = '__all__'

@@ -3,7 +3,7 @@ from django.urls import path, include
 from rest_framework import routers
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
-from accounts.views import UsuarioCreateAPIView
+from accounts.views import UsuarioCreateAPIView, UsuarioListAPIView
 from demandas.views import DemandaViewSet
 
 router = routers.DefaultRouter()
@@ -18,6 +18,6 @@ urlpatterns = [
     path('', include(router.urls)),
 
     path('usuario/', UsuarioCreateAPIView.as_view()),
-    # path('demanda/', DemandaViewSet.as_view()),
+    path('usuario/list', UsuarioListAPIView.as_view()),
     
 ]
