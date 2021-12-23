@@ -24,13 +24,16 @@ class Contato(models.Model):
     class Meta:
         db_table = 'contato'
 
+def upload_image(instance, filename):
+    return f"{filename}"
+
 class Demanda(models.Model):
     id = models.AutoField(primary_key=True)
     descricao = models.TextField(max_length=255)
     endereco = models.ForeignKey(Endereco, on_delete=models.CASCADE)
     contato = models.ForeignKey(Contato, on_delete=models.CASCADE)
     anunciante = models.ForeignKey('accounts.CustomUsuario', on_delete=models.CASCADE)
-    status = models.CharField(max_length=255)
+    status = models.ImageField(upload_to=upload_image, blank=True, null=True)
 
     def __str__(self):
         return '{}'.format(self.id)

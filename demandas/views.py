@@ -1,6 +1,5 @@
-from rest_framework.generics import GenericAPIView, ListAPIView
+from rest_framework.generics import GenericAPIView, ListAPIView, CreateAPIView
 from rest_framework.mixins import UpdateModelMixin, DestroyModelMixin
-from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from demandas.models import Demanda, Endereco, Contato
@@ -9,7 +8,7 @@ from demandas.serializers import DemandaSerializer
 from django.http import HttpResponse
 
 
-class DemandaViewSet(viewsets.ModelViewSet):
+class DemandaViewSet(CreateAPIView, ListAPIView):
     '''Create e List demanda'''
     permission_classes = (IsAuthenticated, )
     serializer_class = DemandaSerializer
@@ -23,6 +22,11 @@ class DemandaViewSet(viewsets.ModelViewSet):
     def create(self, request, *args, **kwargs):
         
         demanda_data = request.data
+
+        if 'fechada' in demanda_data['status'].lower() or "baseline-highlight_off.svg" == demanda_data['status']:
+            demanda_data['status'] = "baseline-highlight_off.svg"
+        else:
+            demanda_data['status'] = "baseline-check_circle_outline.svg"
 
         new_endereco = Endereco.objects.create(
             estado = demanda_data['endereco']['estado'],
@@ -124,7 +128,7 @@ class FinalizarDemanda(ListAPIView):
         get_demanda = Demanda.objects.get(id=self.kwargs['pk'])
        
         if self.request.user.id == get_demanda.anunciante.id or self.request.user.is_superuser == True:
-            get_demanda.status = 'finalizada'  
+            get_demanda.status = "baseline-highlight_off.svg"  
             get_demanda.save()
         
         return Demanda.objects.filter(id=get_demanda.id)
