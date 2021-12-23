@@ -1,4 +1,4 @@
-from rest_framework.generics import GenericAPIView
+from rest_framework.generics import GenericAPIView, ListAPIView
 from rest_framework.mixins import UpdateModelMixin, DestroyModelMixin
 from rest_framework import viewsets
 from rest_framework.response import Response
@@ -113,3 +113,18 @@ class DemandaDelete(GenericAPIView, DestroyModelMixin):
         self.perform_destroy(demanda)
 
         return HttpResponse(status=204) 
+
+class FinalizarDemanda(ListAPIView):
+    '''Finalizar demanda'''
+    queryset = Demanda.objects.all()
+    permission_classes = (IsAuthenticated, )
+    serializer_class = DemandaSerializer
+
+    def get_queryset(self):
+        get_demanda = Demanda.objects.get(id=self.kwargs['pk'])
+       
+        if self.request.user.id == get_demanda.anunciante.id or self.request.user.is_superuser == True:
+            get_demanda.status = 'finalizada'  
+            get_demanda.save()
+        
+        return Demanda.objects.filter(id=get_demanda.id)

@@ -4,7 +4,7 @@ from rest_framework import routers
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 from accounts.views import UsuarioCreateAPIView, UsuarioListAPIView
-from demandas.views import DemandaViewSet, DemandaUpdate, DemandaDelete
+from demandas.views import DemandaViewSet, DemandaUpdate, DemandaDelete, FinalizarDemanda
 
 router = routers.DefaultRouter()
 
@@ -21,5 +21,6 @@ urlpatterns = [
     path('usuario/list', UsuarioListAPIView.as_view()),
     path('demanda/update/<int:pk>/', DemandaUpdate.as_view()),
     path('demanda/delete/<int:pk>/', DemandaDelete.as_view()),
+    path('demanda/finalizar/<int:pk>/', FinalizarDemanda.as_view()),
     
 ]
