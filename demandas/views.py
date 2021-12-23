@@ -23,7 +23,7 @@ class DemandaViewSet(CreateAPIView, ListAPIView):
         
         demanda_data = request.data
 
-        if 'fechada' in demanda_data['status'].lower() or "baseline-highlight_off.svg" == demanda_data['status']:
+        if 'fechada' == demanda_data['status'].lower() or "baseline-highlight_off.svg" == demanda_data['status']:
             demanda_data['status'] = "baseline-highlight_off.svg"
         else:
             demanda_data['status'] = "baseline-check_circle_outline.svg"
@@ -74,8 +74,13 @@ class DemandaUpdate(GenericAPIView, UpdateModelMixin):
         if self.request.user.id != get_demanda.anunciante.id and self.request.user.is_superuser == False:
             return HttpResponse('Unauthorized', status=401)
         
-        get_demanda.endereco = demanda_data.get('endereco', get_demanda.endereco)
-        get_demanda.status = demanda_data.get('status', get_demanda.status)
+        get_demanda.descricao = demanda_data.get('descricao', get_demanda.descricao)
+
+        if demanda_data.get('status'):
+            if 'fechada' == demanda_data.get('status').lower() or "baseline-highlight_off.svg" == demanda_data.get('status'):
+                get_demanda.status = "baseline-highlight_off.svg"
+            else:
+                get_demanda.status = "baseline-check_circle_outline.svg"
 
         if demanda_data.get('contato'):
             contato = Contato.objects.get(id=get_demanda.contato.id)
