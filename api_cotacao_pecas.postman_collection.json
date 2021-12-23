@@ -1,0 +1,458 @@
+{
+	"info": {
+		"_postman_id": "5424d514-7c1a-47da-aa49-0c39429b4a60",
+		"name": "api_cotacao_pecas",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Cadastro de usuário",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"first_name\": \"neudo Paulino\",\r\n    \"email\": \"neudo@gmail.com\",\r\n    \"password\": \"12345678\",\r\n    \"is_superuser\": false\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/usuario/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"usuario",
+						""
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Cadastro de usuário",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"first_name\": \"neudo Paulino\",\r\n    \"email\": \"neudo@gmail.com\",\r\n    \"password\": \"12345678\",\r\n    \"is_superuser\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/usuario/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"usuario",
+								""
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Autenticação",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"neudo@gmail.com\",\r\n    \"password\": \"12345678\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/token/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"token",
+						""
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Autenticação",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"neudo@gmail.com\",\r\n    \"password\": \"12345678\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/token/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"token",
+								""
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "List usuário",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjQwMzg2MjIwLCJpYXQiOjE2NDAyOTk4MjAsImp0aSI6ImI3YTYwYjExNjc3OTRjMmU5ZGE1NGNlYzIyOWYwNDY3IiwidXNlcl9pZCI6MTN9.7P4ryiolNU75OUUtZGYtpiqJdSJn7OkUhsqIXbytwjg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/usuario/list",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"usuario",
+						"list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create  demanda",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjQwMzg2MjIwLCJpYXQiOjE2NDAyOTk4MjAsImp0aSI6ImI3YTYwYjExNjc3OTRjMmU5ZGE1NGNlYzIyOWYwNDY3IiwidXNlcl9pZCI6MTN9.7P4ryiolNU75OUUtZGYtpiqJdSJn7OkUhsqIXbytwjg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"descricao\": \"peça y\",\r\n    \"endereco\": {\r\n        \"estado\": \"CE\",\r\n        \"cidade\": \"Icó\",\r\n        \"endereco\": \"Lagoa\",\r\n        \"numero\": \"34\"\r\n    },\r\n    \"contato\": {\r\n        \"email\": \"joao@gmail.com\",\r\n        \"telefone\": \"88988887777\"\r\n    },\r\n    \"status\": \"aberta\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/demanda/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"demanda",
+						""
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "demanda",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"descricao\": \"peça x\",\r\n    \"endereco\": {\r\n        \"estado\": \"RN\",\r\n        \"cidade\": \"São Miguel\",\r\n        \"endereco\": \"lagoa\",\r\n        \"numero\": \"33\"\r\n    },\r\n    \"contato\": {\r\n        \"email\": \"neudo@gmail.com\",\r\n        \"telefone\": \"88999999999\"\r\n    },\r\n    \"status\": \"aberta\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/demanda/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"demanda",
+								""
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				},
+				{
+					"name": "demanda",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"descricao\": \"peça x\",\r\n    \"anunciante\": 10,\r\n    \"endereco\": {\r\n        \"estado\": \"RN\",\r\n        \"cidade\": \"São Miguel\",\r\n        \"endereco\": \"lagoa\",\r\n        \"numero\": \"33\"\r\n    },\r\n    \"contato\": {\r\n        \"email\": \"maria@gmail.com\",\r\n        \"telefone\": \"88999999999\"\r\n    },\r\n    \"status\": \"aberta\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/demanda/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"demanda",
+								""
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "List demanda",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjQwMzg2MjIwLCJpYXQiOjE2NDAyOTk4MjAsImp0aSI6ImI3YTYwYjExNjc3OTRjMmU5ZGE1NGNlYzIyOWYwNDY3IiwidXNlcl9pZCI6MTN9.7P4ryiolNU75OUUtZGYtpiqJdSJn7OkUhsqIXbytwjg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/demanda/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"demanda",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update demanda",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjQwMzg2MjIwLCJpYXQiOjE2NDAyOTk4MjAsImp0aSI6ImI3YTYwYjExNjc3OTRjMmU5ZGE1NGNlYzIyOWYwNDY3IiwidXNlcl9pZCI6MTN9.7P4ryiolNU75OUUtZGYtpiqJdSJn7OkUhsqIXbytwjg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"descricao\": \"nova peça\",\r\n    \"contato\": {\r\n        \"telefone\": \"66666666666\"\r\n    },\r\n    \"endereco\": {\r\n        \"numero\": 20\r\n    },\r\n    \"status\": \"aberta\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/demanda/update/21/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"demanda",
+						"update",
+						"21",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete demanda",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjQwMzg2MjIwLCJpYXQiOjE2NDAyOTk4MjAsImp0aSI6ImI3YTYwYjExNjc3OTRjMmU5ZGE1NGNlYzIyOWYwNDY3IiwidXNlcl9pZCI6MTN9.7P4ryiolNU75OUUtZGYtpiqJdSJn7OkUhsqIXbytwjg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/demanda/delete/19/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"demanda",
+						"delete",
+						"19",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "finalizar",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjQwMzg2MjIwLCJpYXQiOjE2NDAyOTk4MjAsImp0aSI6ImI3YTYwYjExNjc3OTRjMmU5ZGE1NGNlYzIyOWYwNDY3IiwidXNlcl9pZCI6MTN9.7P4ryiolNU75OUUtZGYtpiqJdSJn7OkUhsqIXbytwjg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/demanda/finalizar/21",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"demanda",
+						"finalizar",
+						"21"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
