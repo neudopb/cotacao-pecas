@@ -1,10 +1,13 @@
-from rest_framework.generics import ListAPIView, CreateAPIView
+from rest_framework.generics import GenericAPIView
+from rest_framework.mixins import UpdateModelMixin
 from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from demandas.models import Demanda, Endereco, Contato
 from accounts.models import CustomUsuario
 from demandas.serializers import DemandaSerializer
+from django.http import HttpResponse
+
 
 class DemandaViewSet(viewsets.ModelViewSet):
     '''CRUD de demanda'''
@@ -54,3 +57,35 @@ class DemandaViewSet(viewsets.ModelViewSet):
         serializer = DemandaSerializer(new_demanda)
         return Response(serializer.data)
 
+class DemandaUpdate(GenericAPIView, UpdateModelMixin):
+    '''Update de demanda'''
+    queryset = Demanda.objects.all()
+    permission_classes = (IsAuthenticated, )
+    serializer_class = DemandaSerializer
+
+    def put(self, request, *args, **kwargs):
+        demanda_data = request.data
+        get_demanda = Demanda.objects.get(id=kwargs.get('pk'))
+
+        if self.request.user.id != get_demanda.anunciante.id and self.request.user.is_superuser == False:
+            return HttpResponse('Unauthorized', status=401)
+        
+        get_demanda.endereco = demanda_data.get('endereco', get_demanda.endereco)
+        get_demanda.status = demanda_data.get('status', get_demanda.status)
+
+        if demanda_data.get('contato'):
+            contato = Contato.objects.get(id=get_demanda.contato.id)
+            contato.email = demanda_data['contato'].get('email', contato.email)
+            contato.telefone = demanda_data['contato'].get('telefone', contato.telefone)
+            contato.save()
+
+        if demanda_data.get('endereco'):
+            endereco = Endereco.objects.get(id=get_demanda.endereco.id)
+            endereco.estado = demanda_data['endereco'].get('estado', endereco.estado)
+            endereco.cidade = demanda_data['endereco'].get('cidade', endereco.cidade)
+            endereco.endereco = demanda_data['endereco'].get('endereco', endereco.endereco)
+            endereco.numero = demanda_data['endereco'].get('numero', endereco.numero)
+            endereco.save()        
+
+        get_demanda.save()
+        return HttpResponse(status=204)
