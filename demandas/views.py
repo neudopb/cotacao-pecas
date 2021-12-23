@@ -1,5 +1,5 @@
 from rest_framework.generics import GenericAPIView
-from rest_framework.mixins import UpdateModelMixin
+from rest_framework.mixins import UpdateModelMixin, DestroyModelMixin
 from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
@@ -10,7 +10,7 @@ from django.http import HttpResponse
 
 
 class DemandaViewSet(viewsets.ModelViewSet):
-    '''CRUD de demanda'''
+    '''Create e List demanda'''
     permission_classes = (IsAuthenticated, )
     serializer_class = DemandaSerializer
 
@@ -89,3 +89,27 @@ class DemandaUpdate(GenericAPIView, UpdateModelMixin):
 
         get_demanda.save()
         return HttpResponse(status=204)
+
+class DemandaDelete(GenericAPIView, DestroyModelMixin):
+    '''Delete de demanda'''
+    queryset = Demanda.objects.all()
+    permission_classes = (IsAuthenticated, )
+    serializer_class = DemandaSerializer
+
+    def delete(self, request, *args, **kwargs):
+        demanda = self.get_object()
+
+        if self.request.user.id != demanda.anunciante.id and self.request.user.is_superuser == False:
+            return HttpResponse('Unauthorized', status=401)
+
+        try:
+            Contato.objects.filter(id=demanda.contato.id).delete()
+        except: pass
+
+        try:
+            Endereco.objects.filter(id=demanda.endereco.id).delete()
+        except: pass
+
+        self.perform_destroy(demanda)
+
+        return HttpResponse(status=204) 
